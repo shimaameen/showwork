@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>متحف الآثار في السعودية</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#1a1008;--tx:#fff;--c1:#7c3aed;--c2:#06b6d4;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%;overflow:hidden}
+body{background:var(--bg);color:var(--tx);font-family:'Cairo',Tahoma,sans-serif;transition:--c1 .8s}
+.bg{position:fixed;inset:0;background:radial-gradient(circle at 20% 20%,var(--c1),transparent 55%),radial-gradient(circle at 80% 80%,var(--c2),transparent 55%),var(--bg);opacity:.55;transition:background 1s}
+.orb{position:fixed;border-radius:50%;filter:blur(60px);opacity:.5;animation:float 9s ease-in-out infinite;background:var(--c2)}
+.o1{width:260px;height:260px;top:8%;left:6%}
+.o2{width:320px;height:320px;bottom:5%;right:8%;background:var(--c1);animation-delay:-4s}
+@keyframes float{50%{transform:translate(40px,-50px) scale(1.15)}}
+.stage{position:fixed;inset:0;perspective:1400px;display:grid;place-items:center}
+.slide{position:absolute;width:min(1000px,92vw);height:min(600px,78vh);display:grid;grid-template-columns:1.2fr 1fr;align-items:center;gap:20px;padding:clamp(18px,4vw,50px);border-radius:28px;background:linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(18px);box-shadow:0 30px 80px rgba(0,0,0,.5);opacity:0;pointer-events:none;transform:translateX(-70%) rotateY(60deg) scale(.7);transition:all .9s cubic-bezier(.2,.8,.2,1);transform-style:preserve-3d}
+.slide.active{opacity:1;pointer-events:auto;transform:translateX(0) rotateY(0) scale(1)}
+.slide.after{transform:translateX(70%) rotateY(-60deg) scale(.7)}
+.slide.active .txt>*{animation:up .8s both}
+.slide.active .txt>*:nth-child(2){animation-delay:.15s}
+.slide.active .txt>*:nth-child(3){animation-delay:.3s}
+@keyframes up{from{opacity:0;transform:translateY(40px) translateZ(0)}}
+.txt{transform:translateZ(60px)}
+h1{font-size:clamp(28px,5vw,58px);font-weight:900;line-height:1.2;background:linear-gradient(90deg,var(--c1),var(--c2),#fff);-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:clamp(24px,3.6vw,42px);font-weight:900;margin-bottom:12px}
+p{font-size:clamp(14px,1.8vw,20px);line-height:1.9;opacity:.85}
+.tag{display:inline-block;padding:4px 16px;border-radius:99px;background:linear-gradient(90deg,var(--c1),var(--c2));font-size:14px;margin-bottom:14px}
+.vis{display:grid;place-items:center;height:100%;transform:translateZ(90px)}
+.scene{width:140px;height:140px;perspective:700px}
+.cube{width:100%;height:100%;position:relative;transform-style:preserve-3d;animation:spin 12s linear infinite}
+.cube i{position:absolute;inset:0;border:2px solid rgba(255,255,255,.6);background:linear-gradient(135deg,var(--c1),var(--c2));opacity:.8;display:grid;place-items:center;font:900 36px Cairo;font-style:normal}
+.cube i:nth-child(1){transform:translateZ(70px)}
+.cube i:nth-child(2){transform:rotateY(180deg) translateZ(70px)}
+.cube i:nth-child(3){transform:rotateY(90deg) translateZ(70px)}
+.cube i:nth-child(4){transform:rotateY(-90deg) translateZ(70px)}
+.cube i:nth-child(5){transform:rotateX(90deg) translateZ(70px)}
+.cube i:nth-child(6){transform:rotateX(-90deg) translateZ(70px)}
+@keyframes spin{to{transform:rotateX(360deg) rotateY(360deg)}}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;grid-column:1/-1}
+.card{padding:22px 16px;border-radius:20px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);text-align:center;transition:transform .2s;transform-style:preserve-3d}
+.card b{display:block;font-size:42px;transform:translateZ(40px)}
+.card h3{margin:6px 0;transform:translateZ(30px)}
+.card p{font-size:14px;line-height:1.6}
+.full{grid-template-columns:1fr}
+.full .head{text-align:center}
+.num{font-size:clamp(34px,6vw,64px);font-weight:900;background:linear-gradient(90deg,var(--c1),var(--c2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.nav{position:fixed;bottom:calc(18px + env(safe-area-inset-bottom,0px));left:0;right:0;display:flex;justify-content:center;align-items:center;gap:14px;z-index:5}
+.nav button{width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.12);color:#fff;font-size:20px;cursor:pointer;backdrop-filter:blur(8px);transition:transform .2s}
+.nav button:hover{transform:scale(1.15)}
+.dots{display:flex;gap:8px}
+.dots span{width:10px;height:10px;border-radius:99px;background:rgba(255,255,255,.35);cursor:pointer;transition:all .4s}
+.dots span.on{width:34px;background:linear-gradient(90deg,var(--c1),var(--c2))}
+@media(max-width:700px){.slide{grid-template-columns:1fr;height:80vh;overflow:auto}.vis{display:none}.cards{grid-template-columns:1fr}.slide .vis.keep{display:grid}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<div class="bg" id="bg"></div><div class="orb o1"></div><div class="orb o2"></div>
+<div class="stage" id="stage">
+
+<section class="slide" data-c1="#d97706" data-c2="#7c2d12">
+  <div class="txt"><span class="tag">المملكة العربية السعودية</span><h1>متحف الآثار: رحلة عبر آلاف السنين</h1><p>من النقوش الصخرية إلى الممالك القديمة وحتى فجر الإسلام، نستعرض إرث الجزيرة العربية الحضاري.</p></div>
+  <div class="vis"><div class="scene"><div class="cube" style="animation-duration:12s"><i>◈</i><i>✦</i><i>◆</i><i>●</i><i>▲</i><i>■</i></div></div></div>
+</section>
+
+<section class="slide" data-c1="#14b8a6" data-c2="#0f766e">
+  <div class="txt"><span class="tag">عن المتحف</span><h2>المتحف الوطني في الرياض</h2><p>يقع ضمن مركز الملك عبدالعزيز التاريخي، ويروي قصة الإنسان والمكان في الجزيرة العربية منذ أقدم العصور، عبر قاعات تعرض القطع الأثرية والمجسمات والوسائط التفاعلية.</p></div>
+  <div class="vis"><div class="scene"><div class="cube" style="animation-duration:9s"><i>١</i><i>٢</i><i>٣</i><i>٤</i><i>٥</i><i>٦</i></div></div></div>
+</section>
+
+<section class="slide full" data-c1="#f59e0b" data-c2="#b45309">
+  <div class="head txt"><span class="tag">القاعات</span><h2>ماذا ستشاهد؟</h2></div>
+  <div class="cards">
+    <div class="card"><b>🌍</b><h3>الإنسان والكون</h3><p>بداية الحياة والعصور الحجرية.</p></div>
+    <div class="card"><b>🏺</b><h3>الممالك العربية</h3><p>حضارات ما قبل الإسلام وقوافل التجارة.</p></div>
+    <div class="card"><b>🕌</b><h3>العصر الإسلامي</h3><p>الرسالة والدولة السعودية وتوحيد المملكة.</p></div>
+  </div>
+</section>
+
+<section class="slide full" data-c1="#ef4444" data-c2="#9a3412">
+  <div class="head txt"><span class="tag">مواقع أثرية</span><h2>كنوز من أنحاء المملكة</h2></div>
+  <div class="cards">
+    <div class="card"><b>🏜️</b><h3>الحِجر (مدائن صالح)</h3><p>مدافن نبطية منحوتة في الصخر.</p></div>
+    <div class="card"><b>🗿</b><h3>الفن الصخري في حائل</h3><p>نقوش ورسوم عمرها آلاف السنين.</p></div>
+    <div class="card"><b>🏛️</b><h3>قرية الفاو</h3><p>مدينة قديمة على طريق التجارة.</p></div>
+  </div>
+</section>
+
+<section class="slide full" data-c1="#eab308" data-c2="#a16207">
+  <div class="head txt"><span class="tag">بالأرقام</span><h2>محطات مهمة</h2></div>
+  <div class="cards">
+    <div class="card"><div class="num" data-n="8">0</div><p>قاعات عرض رئيسية</p></div>
+    <div class="card"><div class="num" data-n="1999">0</div><p>افتتاح المتحف</p></div>
+    <div class="card"><div class="num" data-n="2008">0</div><p>إدراج الحِجر في اليونسكو</p></div>
+  </div>
+</section>
+
+<section class="slide" data-c1="#22d3ee" data-c2="#0e7490">
+  <div class="txt"><span class="tag">شكراً لكم</span><h1>تراثنا هويتنا</h1><p>نتشرف بزيارتكم لمتاحف المملكة واكتشاف تاريخها العريق.</p></div>
+  <div class="vis"><div class="scene"><div class="cube" style="animation-duration:6s"><i>♥</i><i>♥</i><i>♥</i><i>♥</i><i>♥</i><i>♥</i></div></div></div>
+</section>
+</div>
+
+<div class="nav">
+  <button id="nx" aria-label="التالي">→</button>
+  <div class="dots" id="dots"></div>
+  <button id="pv" aria-label="السابق">←</button>
+</div>
+
+<script>
+const S=[...document.querySelectorAll('.slide')],dots=document.getElementById('dots');
+let i=0;
+S.forEach((_,k)=>{const d=document.createElement('span');d.onclick=()=>go(k);dots.appendChild(d)});
+function count(el){const n=+el.dataset.n;let t=0;const f=()=>{t+=n/60;if(t>=n){el.textContent=n.toLocaleString('ar-EG',{useGrouping:false});return}el.textContent=Math.floor(t).toLocaleString('ar-EG',{useGrouping:false});requestAnimationFrame(f)};f()}
+function go(k){
+  i=Math.max(0,Math.min(S.length-1,k));
+  S.forEach((s,j)=>{s.classList.toggle('active',j===i);s.classList.toggle('after',j>i)});
+  [...dots.children].forEach((d,j)=>d.classList.toggle('on',j===i));
+  const s=S[i],r=document.documentElement.style;
+  r.setProperty('--c1',s.dataset.c1);r.setProperty('--c2',s.dataset.c2);
+  s.querySelectorAll('.num').forEach(count);
+}
+document.getElementById('nx').onclick=()=>go(i+1);
+document.getElementById('pv').onclick=()=>go(i-1);
+addEventListener('keydown',e=>{
+  if(['ArrowLeft','PageDown',' '].includes(e.key))go(i+1);
+  if(['ArrowRight','PageUp'].includes(e.key))go(i-1);
+});
+let x0=null;
+addEventListener('touchstart',e=>x0=e.touches[0].clientX);
+addEventListener('touchend',e=>{if(x0===null)return;const d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>60)go(d<0?i+1:i-1);x0=null});
+addEventListener('wheel',e=>{if(Math.abs(e.deltaY)>40)go(e.deltaY>0?i+1:i-1)},{passive:true});
+addEventListener('mousemove',e=>{
+  const s=S[i],x=(e.clientX/innerWidth-.5),y=(e.clientY/innerHeight-.5);
+  s.style.transition='transform .15s';
+  s.style.transform=`rotateY(${x*14}deg) rotateX(${-y*10}deg)`;
+});
+addEventListener('mouseleave',()=>{S[i].style.transform=''});
+S.forEach(s=>s.addEventListener('transitionend',()=>{s.style.transition=''}));
+const _go=go;go=function(k){S.forEach(s=>{s.style.transform='';s.style.transition=''});_go(k)};
+go(0);
+</script>
+</body>
+</html>
